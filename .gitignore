@@ -1,0 +1,8 @@
+/cmake-*
+/.idea
+/build/deploy
+/build/cmake-*
+/build/cmake/cmake-*
+/grpc-helloworld/cmake-*
+/deploy
+/.svn
