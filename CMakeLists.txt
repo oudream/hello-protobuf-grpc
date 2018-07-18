@@ -7,5 +7,6 @@ cmake_minimum_required(VERSION 2.8.12)
 project(hello-protobuf-grpc)
 
 add_subdirectory(grpc-helloworld)
+add_subdirectory(grpc-hellostreamingworld)
 add_subdirectory(protobuf-examples)
 
