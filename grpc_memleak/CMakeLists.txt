@@ -23,7 +23,7 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-project(HelloWorld C CXX)
+project(randnum C CXX)
 
 if(NOT MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -59,35 +59,33 @@ set(_GRPC_GRPCPP_UNSECURE gRPC::grpc++_unsecure)
 set(_GRPC_CPP_PLUGIN_EXECUTABLE ${GRPC_CPP_PLUGIN})
 
 # Proto file
-get_filename_component(hw_proto "./protos/helloworld.proto" ABSOLUTE)
-get_filename_component(hw_proto_path "${hw_proto}" PATH)
+get_filename_component(hsw_proto "./randnum.proto" ABSOLUTE)
+get_filename_component(hsw_proto_path "${hsw_proto}" PATH)
 
 # Generated sources
-set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.cc")
-set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.pb.h")
-set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.cc")
-set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/helloworld.grpc.pb.h")
+set(hsw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/randnum.pb.cc")
+set(hsw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/randnum.pb.h")
+set(hsw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/randnum.grpc.pb.cc")
+set(hsw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/randnum.grpc.pb.h")
 add_custom_command(
-      OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
+      OUTPUT "${hsw_proto_srcs}" "${hsw_proto_hdrs}" "${hsw_grpc_srcs}" "${hsw_grpc_hdrs}"
       COMMAND ${PROTOBUF_PROTOC_EXECUTABLE}
       ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
         --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-        -I "${hw_proto_path}"
+        -I "${hsw_proto_path}"
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-        "${hw_proto}"
-      DEPENDS "${hw_proto}")
+        "${hsw_proto}"
+      DEPENDS "${hsw_proto}")
 
 # Include generated *.pb.h files
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-include_directories(${PROTOBUF_INCLUDE_DIRS})
 
-# Targets greeter_[async_](client|server)
+# Targets randnum_[async_](client|server)
 foreach(_target
-  greeter_client greeter_server
-  greeter_async_client greeter_async_server)
+  randnum_client randnum_server)
   add_executable(${_target} "${_target}.cc"
-    ${hw_proto_srcs}
-    ${hw_grpc_srcs})
+    ${hsw_proto_srcs}
+    ${hsw_grpc_srcs})
   target_link_libraries(${_target}
           ${GRPCPP_LIBRARY}
           ${GRPCPP_LIBRARY_UNSECURE}
@@ -97,9 +95,9 @@ endforeach()
 
 message("--")
 message("\${CMAKE_CURRENT_BINARY_DIR}" ${CMAKE_CURRENT_BINARY_DIR})
-message("\${hw_proto_path}" ${hw_proto_path})
+message("\${hsw_proto_path}" ${hsw_proto_path})
 message("\${_GRPC_CPP_PLUGIN_EXECUTABLE}" ${_GRPC_CPP_PLUGIN_EXECUTABLE})
-message("\${hw_proto}" ${hw_proto})
+message("\${hsw_proto}" ${hsw_proto})
 message("\${PROTOBUF_PROTOC_EXECUTABLE}" ${PROTOBUF_PROTOC_EXECUTABLE})
 
 message("--")

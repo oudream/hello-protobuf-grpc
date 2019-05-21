@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package randnum;
+
+message Number {
+  double value = 1;
+}
+
+message EmptyRequest {
+}
+
+
+service RandomNumbers {
+  rpc GetNext(EmptyRequest) returns (stream Number) {}
+}
+
