@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.0)
 # Project
 project(hello-protobuf-grpc)
 
-set(GRPC_AS_SUBMODULE 1)
+#set(GRPC_AS_SUBMODULE 1)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 #add_subdirectory(grpc)

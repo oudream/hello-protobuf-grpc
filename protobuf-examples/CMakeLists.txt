@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(protobuf-examples)
 
 # Find required protobuf package
-find_package(protobuf REQUIRED)
+find_package(Protobuf REQUIRED)
 
 add_definitions(-std=c++11)
 
