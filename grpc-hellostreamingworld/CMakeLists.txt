@@ -32,10 +32,10 @@ else()
 endif()
 
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake-module)
-
-message('-------------')
-message("\${CMAKE_MODULE_PATH}" ${CMAKE_MODULE_PATH})
+#SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake-module)
+#
+#message('-------------')
+#message("\${CMAKE_MODULE_PATH}" ${CMAKE_MODULE_PATH})
 
 
 # This branch assumes that gRPC and all its dependencies are already installed
